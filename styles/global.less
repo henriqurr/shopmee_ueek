@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #FFFFFF;
+    --black: #000000;
+
+    --background: #F5F5F5;
+    --background-input: #F4F4F4;
+
+    --gray-400: #363636;
+    --gray-100: #646464; 
+    --gray-050: #CCC;
+
+    --subscribe-button-background:#52AD43;
+    --subscribe-button-border: #51AD42;
+}
+
+body {
+    background: var(--background);
+    font-family: 'Rubik', sans-serif;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+button, a {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+}
+
+body, input, textarea, select, button {
+    font: 300 20px "Rubik", sans-serif;
+}
+
+[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

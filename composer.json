@@ -1,0 +1,11 @@
+{
+    "name": "shopmee/newsletter",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "leafo/lessphp": "0.5.0"
+    }
+}
