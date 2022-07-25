@@ -38,25 +38,19 @@ if (isset($_POST['createdAt'])) {
     $createdAt = "";
 }
 
-//echo "Valores: Id: {$accountId}, Email: {$email}, dataCollect: {$dataCollect}, createdAt: {$createdAt}";
-
+#update account in the database
 if ($accountId == 0 || $accountId == null) {
     $sucessCode = 1;
 }
 elseif ($email == 0 || $email == null) {
     $sucessCode = 1;
-}
-
-if ($sucessCode == 0) {
+} else {
     $database = new SQLFunctions();
 
     if (!$database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
         $sucessCode = 2;
     }
     else {
-        //$result = $database->selectAccountPerId($accountId);
-       // $fetch = $result->fetch(PDO::FETCH_ASSOC);
-
         $database->updateAccount(array(
             $email,
             $dataCollect,

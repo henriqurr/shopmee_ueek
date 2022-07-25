@@ -22,14 +22,12 @@ if (isset($_POST['email'])) {
     $email = "";
 }
 
-
+#create in the database
 if ($email == "" || $email == null) {
     $sucessCode = 1;
 } elseif (!str_contains($email, '@') || strlen($email) < 10) {
     $sucessCode = 3;
-}
-
-if ($sucessCode == 0) {
+} else {
     $database = new SQLFunctions();
 
     if ($database->selectAccountPerEmail(array($email))->fetch(PDO::FETCH_ASSOC)) {

@@ -14,11 +14,10 @@ if (isset($_POST['id'])) {
     $accountId = 0;
 }
 
+#delete account in the database
 if ($accountId == 0 || $accountId == null) {
     $sucessCode = 1;
-}
-
-if ($sucessCode == 0) {
+} else {
     $database = new SQLFunctions();
 
     if (!$database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
