@@ -35,7 +35,7 @@ if ($sucessCode == 0) {
 }
 ?>
 
-<form class="container" action="tableManagement.php" method="post">
+<form class="container" action="tableManagement.php" method="POST">
     <div class="boxContainer"> 
         <div>
             <img src="images/shopmee.svg" alt="Shopmee" />

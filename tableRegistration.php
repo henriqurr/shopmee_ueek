@@ -1,8 +1,8 @@
 <?php 
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+//use PHPMailer\PHPMailer\PHPMailer;
+//use PHPMailer\PHPMailer\SMTP;
+//use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/phpmailer/phpmailer/src/Exception.php';
 require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
@@ -12,7 +12,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/shopmee/pages/header.php");
 include("database/Connection.php");
 include("database/SQLFunctions.php");
 
-$sucessCode = 0; // 0 - sucess / 1 - error / 2 - already exist
+$sucessCode = 0; // 0 - sucess / 1 - error / 2 - already exist / 3 - can not
 
 if (isset($_POST['email'])) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -22,8 +22,11 @@ if (isset($_POST['email'])) {
     $email = "";
 }
 
+
 if ($email == "" || $email == null) {
     $sucessCode = 1;
+} elseif (!str_contains($email, '@') || strlen($email) < 10) {
+    $sucessCode = 3;
 }
 
 if ($sucessCode == 0) {
@@ -45,7 +48,7 @@ if ($sucessCode == 0) {
 }
 
 #send email
-if ($sucessCode == 0) {
+/*if ($sucessCode == 0) {
     $mail = new PHPMailer();
     
     try {
@@ -72,15 +75,15 @@ if ($sucessCode == 0) {
         $mail->Subject = 'Test subject';
         $mail->Body    = 'Test body';
     
-        //if ($mail->send()) {
-        //    echo 'Message has been sent';
-        //}
+        if ($mail->send()) {
+            echo 'Message has been sent';
+        }
     } catch (Exception $e) {
     }
-}
+}*/
 ?>
 
-<form class="container" action="index.php" method="post">
+<form class="container" action="index.php" method="POST">
     <div class="boxContainer"> 
         <div>
             <img src="images/shopmee.svg" alt="Shopmee" />
@@ -92,6 +95,9 @@ if ($sucessCode == 0) {
                 }
                 elseif ($sucessCode == 2) {
                     echo "<h1>O email já está cadastrado.</h1>";
+                }
+                elseif ($sucessCode == 3) {
+                    echo "<h1>O email não pode ser cadastrado.</h1>";
                 }
                 else {
                     echo "<h1>Ocorreu um problema ao realizar cadastro.</h1>";
