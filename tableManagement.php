@@ -21,7 +21,7 @@
     <title>Shopmee - Database</title>
 </head>
 <body>
-    <form class="container" action="index.php" method="post">
+    <form class="container" action="index.php" method="POST">
         <div class="boxContainer"> 
             <div>
                 <img src="images/shopmee.svg" alt="Shopmee" />
@@ -83,6 +83,17 @@
                         }
                     ?>
                 </table>
+
+                <a href=
+                    <?php
+                        echo "tableExcelExport.php?id=0";
+                    ?>
+                >
+                        <button class="buttonBack" type="button">
+                            Exportar .xls
+                        </button>
+                </a>
+
                 <button class="buttonBack" type="submit">
                     Voltar
                 </button>

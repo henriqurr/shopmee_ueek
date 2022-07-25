@@ -38,7 +38,7 @@ if (isset($_POST['createdAt'])) {
     $createdAt = "";
 }
 
-echo "Valores: Id: {$accountId}, Email: {$email}, dataCollect: {$dataCollect}, createdAt: {$createdAt}";
+//echo "Valores: Id: {$accountId}, Email: {$email}, dataCollect: {$dataCollect}, createdAt: {$createdAt}";
 
 if ($accountId == 0 || $accountId == null) {
     $sucessCode = 1;

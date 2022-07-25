@@ -1,6 +1,6 @@
 <?php include("{$_SERVER['DOCUMENT_ROOT']}/shopmee/pages/header.php"); ?>
 
-<form class="container" action="tableRegistration.php" method="post">
+<form class="container" action="tableRegistration.php" method="POST">
     <div class="boxContainer"> 
         <div>
             <img src="images/shopmee.svg" alt="Shopmee" />

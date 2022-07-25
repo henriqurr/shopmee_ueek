@@ -6,6 +6,7 @@
         }
     },
     "require": {
-        "leafo/lessphp": "0.5.0"
+        "leafo/lessphp": "0.5.0",
+        "phpmailer/phpmailer": "^6.6"
     }
 }
