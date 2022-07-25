@@ -15,7 +15,7 @@ From there, it will be working when the "localhost/shopmee" link is accessed in 
 
 NOTE: to access the administrator page to change the database, access the link "localhost/shopmee/tableManagement.php" in the browser.
 
-This project has design on all pages included and various protections and logic applied to the code, for smooth and smooth functioning of all features.
+This project has design on all pages included and various protections and logic applied to the code, for perfect running of all features.
 
 created by Henrique Rodrigues.
 
