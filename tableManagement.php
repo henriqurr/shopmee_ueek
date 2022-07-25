@@ -16,6 +16,15 @@
         };
     </script>
     <script src="includes/less.js" type="text/javascript" data-env="development"></script>
+    <script src="includes/zepto.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        //var index = document.getElementById('email').value;
+        //var option = index.options[no.selectedIndex].text;
+
+        function updateFetch() {
+        }
+    </script>
 
     <link rel="shortcut icon" href="images/tool-favicon.jpg" type="image/jpg" />
     <title>Shopmee - Database</title>
@@ -49,13 +58,13 @@
                             <tr>
                                 <td><?php echo $fetch['id']; ?></td>
                                 <td>
-                                    <input name="email" value=<?php echo $fetch['email']; ?>></input>
+                                    <input id="email" name="email" onchange="updateFetch()" value=<?php echo $fetch['email']; ?>></input>
                                 </td>
                                 <td>
-                                    <input name="dataCollect" value=<?php echo $fetch['data_collect']; ?>></input>
+                                    <input id="dataCollect" name="dataCollect" onchange="updateFetch()" value=<?php echo $fetch['data_collect']; ?>></input>
                                 </td>
                                 <td>
-                                    <input name="createdAt" value=<?php echo $fetch['created_at']; ?>></input>
+                                    <input id="createdAt" name="createdAt" onchange="updateFetch()" value=<?php echo $fetch['created_at']; ?>></input>
                                 </td>
                                 <td>
                                     <a class="updateButton" 
@@ -76,7 +85,6 @@
                                     >
                                         Deletar
                                     </a>
-
                                 </td>
                             </tr>
                     <?php
