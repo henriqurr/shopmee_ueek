@@ -2,20 +2,24 @@
 
 class SQLFunctions extends Connection {
 
-    private $Counter;
     private $Crud;
 
+    #Execute query
     private function preparedStatements($Query, $Parameters) {
-        $this->Counter = count($Parameters);
-        $this->Crud = $this->connect()->prepare($Query);
+        try {
+            $Counter = count($Parameters);
+            $this->Crud = $this->connect()->prepare($Query);
 
-        if ($this->Counter > 0) {
-            for ($i = 1; $i <= $this->Counter; $i++) {
-                $this->Crud->bindValue($i, $Parameters[$i - 1]);
+            if ($Counter > 0) {
+                for ($i = 1; $i <= $Counter; $i++) {
+                    $this->Crud->bindValue($i, $Parameters[$i - 1]);
+                }
             }
-        }
 
-        $this->Crud->execute();
+            $this->Crud->execute();
+        } catch (Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 
     public function insertAccount($Parameters) {

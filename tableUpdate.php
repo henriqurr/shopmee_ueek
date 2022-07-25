@@ -6,58 +6,63 @@ include("database/SQLFunctions.php");
 
 $sucessCode = 0; // 0 - sucess / 1 - error / 2 - not found
 
-if (isset($_POST['id'])) {
-    $accountId = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
-} elseif (isset($_GET['id'])) {
-    $accountId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
-} else {
-    $accountId = 0;
-}
-
-if (isset($_POST['email'])) {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-} elseif (isset($_GET['email'])) {
-    $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL);
-} else {
-    $email = "";
-}
-
-if (isset($_POST['dataCollect'])) {
-    $dataCollect = filter_input(INPUT_POST, 'dataCollect', FILTER_SANITIZE_SPECIAL_CHARS);
-} elseif (isset($_GET['dataCollect'])) {
-    $dataCollect = filter_input(INPUT_GET, 'dataCollect', FILTER_SANITIZE_SPECIAL_CHARS);
-} else {
-    $dataCollect = 0;
-}
-
-if (isset($_POST['createdAt'])) {
-    $createdAt = filter_input(INPUT_POST, 'createdAt', FILTER_SANITIZE_SPECIAL_CHARS);
-} elseif (isset($_GET['createdAt'])) {
-    $createdAt = filter_input(INPUT_GET, 'createdAt', FILTER_SANITIZE_SPECIAL_CHARS);
-} else {
-    $createdAt = "";
-}
-
-#update account in the database
-if ($accountId == 0 || $accountId == null) {
-    $sucessCode = 1;
-}
-elseif ($email == 0 || $email == null) {
-    $sucessCode = 1;
-} else {
-    $database = new SQLFunctions();
-
-    if (!$database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
-        $sucessCode = 2;
+try {
+    if (isset($_POST['id'])) {
+        $accountId = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+    } elseif (isset($_GET['id'])) {
+        $accountId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+    } else {
+        $accountId = 0;
     }
-    else {
-        $database->updateAccount(array(
-            $email,
-            $dataCollect,
-            $createdAt,
-            $accountId
-        ));
+
+    if (isset($_POST['email'])) {
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    } elseif (isset($_GET['email'])) {
+        $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL);
+    } else {
+        $email = "";
     }
+
+    if (isset($_POST['data_collect'])) {
+        $dataCollect = filter_input(INPUT_POST, 'data_collect', FILTER_SANITIZE_SPECIAL_CHARS);
+    } elseif (isset($_GET['data_collect'])) {
+        $dataCollect = filter_input(INPUT_GET, 'data_collect', FILTER_SANITIZE_SPECIAL_CHARS);
+    } else {
+        $dataCollect = 0;
+    }
+
+    if (isset($_POST['created_at'])) {
+        $createdAt = filter_input(INPUT_POST, 'created_at', FILTER_SANITIZE_SPECIAL_CHARS);
+    } elseif (isset($_GET['created_at'])) {
+        $createdAt = filter_input(INPUT_GET, 'created_at', FILTER_SANITIZE_SPECIAL_CHARS);
+    } else {
+        $createdAt = "";
+    }
+
+    #update account in the database
+    if ($accountId == 0 || $accountId == null) {
+        $sucessCode = 1;
+    }
+    elseif ($email == 0 || $email == null) {
+        $sucessCode = 1;
+    } else {
+        $database = new SQLFunctions();
+
+        if (!$database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
+            $sucessCode = 2;
+        }
+        else {
+            $database->updateAccount(array(
+                $email,
+                $dataCollect,
+                $createdAt,
+                $accountId
+            ));
+        }
+    }
+}
+catch (Exception $e) {
+    $sucessCode = 1;
 }
 ?>
 

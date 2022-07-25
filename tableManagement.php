@@ -16,15 +16,6 @@
         };
     </script>
     <script src="includes/less.js" type="text/javascript" data-env="development"></script>
-    <script src="includes/zepto.min.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-        //var index = document.getElementById('email').value;
-        //var option = index.options[no.selectedIndex].text;
-
-        function updateFetch() {
-        }
-    </script>
 
     <link rel="shortcut icon" href="images/tool-favicon.jpg" type="image/jpg" />
     <title>Shopmee - Painel</title>
@@ -40,7 +31,7 @@
                 <h1>Sistema: Edição permitida (Id não está permitido).</h1>
                 <table>
                     <tr>
-                        <td>Id</td>
+                        <td>ID</td>
                         <td>Email</td>
                         <td>Coletar Dados</td>
                         <td>Data de Criação</td>
@@ -56,28 +47,20 @@
                         while ($fetch = $result->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                             <tr>
-                                <td><?php echo $fetch['id']; ?></td>
+                                <td><?php echo $fetch['id'];?></td>
+                                <td><?php echo $fetch['email'];?></td>
+                                <td><?php echo $fetch['data_collect'];?></td>
+                                <td><?php echo $fetch['created_at'];?></td>
                                 <td>
-                                    <input id="email" name="email" onchange="updateFetch()" value=<?php echo $fetch['email']; ?>></input>
-                                </td>
-                                <td>
-                                    <input id="dataCollect" name="dataCollect" onchange="updateFetch()" value=<?php echo $fetch['data_collect']; ?>></input>
-                                </td>
-                                <td>
-                                    <input id="createdAt" name="createdAt" onchange="updateFetch()" value=<?php echo $fetch['created_at']; ?>></input>
-                                </td>
-                                <td>
-                                    <a class="updateButton" 
-                                        name="updateButton"
+                                    <a  name="updateButton"
                                         href=
                                         <?php
-                                            echo "tableUpdate.php?id=".$fetch['id']."&email=".$fetch['email']."&dataCollect=".$fetch['data_collect']."&createdAt=".$fetch['created_at'];
+                                            echo "tableEdit.php?id=".$fetch['id'];
                                         ?>
                                     >
-                                        Atualizar
+                                        Editar
                                     </a>
-                                    <a class="deleteButton" 
-                                        name="deleteButton"
+                                    <a  name="deleteButton"
                                         href=
                                         <?php
                                             echo "tableDelete.php?id=".$fetch['id'];
@@ -94,7 +77,7 @@
 
                 <a href=
                     <?php
-                        echo "tableExcelExport.php?id=0";
+                        echo "pages/excelExport.php";
                     ?>
                 >
                         <button class="buttonBack" type="button">

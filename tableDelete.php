@@ -1,36 +1,39 @@
 <?php
-
 include("{$_SERVER['DOCUMENT_ROOT']}/shopmee/pages/header.php");
 include("database/Connection.php");
 include("database/SQLFunctions.php");
 
 $sucessCode = 0; // 0 - sucess / 1 - error / 2 - not exist
 
-if (isset($_POST['id'])) {
-    $accountId = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
-} elseif (isset($_GET['id'])) {
-    $accountId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
-} else {
-    $accountId = 0;
-}
-
-#delete account in the database
-if ($accountId == 0 || $accountId == null) {
-    $sucessCode = 1;
-} else {
-    $database = new SQLFunctions();
-
-    if (!$database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
-        $sucessCode = 2;
+try {
+    if (isset($_POST['id'])) {
+        $accountId = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+    } elseif (isset($_GET['id'])) {
+        $accountId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+    } else {
+        $accountId = 0;
     }
-    else {
-        $database->deleteAccount(array(
-            $accountId
-        ));
-        if ($database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
-            $sucessCode = 1;
+
+    #delete account in the database
+    if ($accountId == 0 || $accountId == null) {
+        $sucessCode = 1;
+    } else {
+        $database = new SQLFunctions();
+
+        if (!$database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
+            $sucessCode = 2;
+        }
+        else {
+            $database->deleteAccount(array(
+                $accountId
+            ));
+            if ($database->selectAccountPerId(array($accountId))->fetch(PDO::FETCH_ASSOC)) {
+                $sucessCode = 1;
+            }
         }
     }
+} catch (Exception $e) {
+    $sucessCode = 1;
 }
 ?>
 

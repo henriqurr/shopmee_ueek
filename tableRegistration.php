@@ -1,5 +1,4 @@
 <?php 
-
 //use PHPMailer\PHPMailer\PHPMailer;
 //use PHPMailer\PHPMailer\SMTP;
 //use PHPMailer\PHPMailer\Exception;
@@ -14,35 +13,39 @@ include("database/SQLFunctions.php");
 
 $sucessCode = 0; // 0 - sucess / 1 - error / 2 - already exist / 3 - can not
 
-if (isset($_POST['email'])) {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-} elseif (isset($_GET['email'])) {
-    $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL);
-} else {
-    $email = "";
-}
-
-#create in the database
-if ($email == "" || $email == null) {
-    $sucessCode = 1;
-} elseif (!str_contains($email, '@') || strlen($email) < 10) {
-    $sucessCode = 3;
-} else {
-    $database = new SQLFunctions();
-
-    if ($database->selectAccountPerEmail(array($email))->fetch(PDO::FETCH_ASSOC)) {
-        $sucessCode = 2;
+try {
+    if (isset($_POST['email'])) {
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    } elseif (isset($_GET['email'])) {
+        $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL);
+    } else {
+        $email = "";
     }
-    else {
-        $database->insertAccount(array(
-            $email,
-            1, //true
-            date('Y-m-d')
-        ));
-        if (!$database->selectAccountPerEmail(array($email))->fetch(PDO::FETCH_ASSOC)) {
-            $sucessCode = 1;
+
+    #create in the database
+    if ($email == "" || $email == null) {
+        $sucessCode = 1;
+    } elseif (!str_contains($email, '@') || strlen($email) < 10) {
+        $sucessCode = 3;
+    } else {
+        $database = new SQLFunctions();
+
+        if ($database->selectAccountPerEmail(array($email))->fetch(PDO::FETCH_ASSOC)) {
+            $sucessCode = 2;
+        }
+        else {
+            $database->insertAccount(array(
+                $email,
+                1, //true
+                date('Y-m-d')
+            ));
+            if (!$database->selectAccountPerEmail(array($email))->fetch(PDO::FETCH_ASSOC)) {
+                $sucessCode = 1;
+            }
         }
     }
+} catch (Exception $e) {
+    $sucessCode = 1;
 }
 
 #send email
