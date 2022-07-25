@@ -27,7 +27,7 @@
     </script>
 
     <link rel="shortcut icon" href="images/tool-favicon.jpg" type="image/jpg" />
-    <title>Shopmee - Database</title>
+    <title>Shopmee - Painel</title>
 </head>
 <body>
     <form class="container" action="index.php" method="POST">
