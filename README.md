@@ -13,8 +13,6 @@ Step 2: Change the MYSQL configuration for connection, for that, access the file
 
 From there, it will be working when the "localhost/shopmee" link is accessed in the browser.
 
-NOTE: to access the administrator page to change the database, access the link "localhost/shopmee/tableManagement.php" in the browser.
-
 This project has design on all pages included and various protections and logic applied to the code, for perfect running of all features.
 
 created by Henrique Rodrigues.
@@ -32,8 +30,6 @@ Passo 2: Alterar a configuração do MYSQL para conexão, para isso, acesse o ar
 Passo 3: Criar um banco de dados no MYSQL pelo phpmyadmin ou um gerenciador de banco de dados, usando como base o template "shopmee.sql" contido na pasta raiz inicial do projeto.
 
 A partir dai, já estará funcionando quando for acessado no navegador o link "localhost/shopmee".
-
-OBS: para acessar a página de administrador para alteração no banco de dados, deverá ser acessado o link "localhost/shopmee/tableManagement.php" no navegador.
 
 Esse projeto tem design em todas as páginas incluídas e várias proteções e lógicas aplicada ao código, para funcionamento perfeito e sem problemas de todas as features.
 
