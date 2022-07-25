@@ -15,6 +15,12 @@
             <button type="submit">
                 Inscrever-me
             </button>
+
+            <a class="painelButton" href="tableManagement.php">
+                <button type="button">
+                    Painel
+                </button>
+            </a>
         </div>
     </div>
 </form>
